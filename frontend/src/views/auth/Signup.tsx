@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import logo from "../../resources/logo.png";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function SignUp() {
   return (
     <div className="flex h-screen items-center flex-col justify-center px-6 py-12 lg:px-8 bg-gray-50">
       <div className="sm:bg-white shadow-sm border-2 border-gray-100 w-[450px] py-12">
@@ -14,6 +14,24 @@ export default function Login() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
+            <div>
+              <label
+                htmlFor="fullname"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+               Fullname
+              </label>
+              <div className="mt-2">
+                <input
+                  id="fullname"
+                  name="fullname"
+                  type="text"
+                  autoComplete="fullname"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 outline-gray-900"
+                />
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="email"
@@ -41,14 +59,7 @@ export default function Login() {
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <Link
-                    to="/auth/forgot-password"
-                    className="font-semibold text-blue-600 hover:text-blue-500"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
+               
               </div>
               <div className="mt-2">
                 <input
@@ -61,24 +72,45 @@ export default function Login() {
                 />
               </div>
             </div>
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="confirm_password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Confirm Password
+                </label>
+               
+              </div>
+              <div className="mt-2">
+                <input
+                  id="confirm_password"
+                  name="confirm_password"
+                  type="password"
+                  autoComplete="confirm_password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 outline-gray-900"
+                />
+              </div>
+            </div>
 
             <div>
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
-                Sign in
+                Sign up
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <Link
-              to="/auth/signup"
+              to="/auth/signin"
               className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
             >
-              Sign up for free
+             Sign in here
             </Link>
           </p>
         </div>
