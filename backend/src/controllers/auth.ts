@@ -1,25 +1,10 @@
 import { Request, Response } from "express";
-import Users from "../models/user.schema";
+import Users from "../models/user";
 import { StatusCodes } from "http-status-codes";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 
-
-export const getUsers = async (req: Request, res: Response) => {
-    try {
-      const allUsers = await Users.find({}).lean(); 
-      res.status(StatusCodes.OK).json({ message: "All users fetched successfully", allUsers });
-    } catch (error) {
-      console.error("Error fetching users:", error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Failed to fetch users" });
-    }
-  };
-  
-export const getUser = (req: Request<{ id: string }>, res: Response) => {
-  const userId = req.params.id;
-  res.send(`Hello user with id ${userId}`);
-};
 
 export const signUp = async (req: Request, res: Response) => {
   try {
