@@ -1,84 +1,92 @@
-import Transactions from "../../components/transaction";
+import { useState } from "react";
+import AllTransactions from "../../components/AllTransactions";
+import CardBalance from "../../components/CardBalance";
+import Expenses from "../../components/Expenses";
+import Graph from "../../components/Graph";
+import Transactions from "../../components/Transaction";
+import Modal from "../../components/Modal";
+import CategoryForm from "../../components/CategoryForm";
+import ExpensesForm from "../../components/ExpensesForm";
+import IncomeForm from "../../components/IncomeForm";
 
 const Dashboard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("category");
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  let content;
+
+  if (selectedValue === "category") {
+    content = <CategoryForm />;
+  } else if (selectedValue === "expenses") {
+    content = <ExpensesForm />;
+  } else {
+    content = <IncomeForm />;
+  }
+
   return (
-    <div className="h-screen">
-      <div className="h-[7%] bg-white border-2 border-slate-100 py-3 flex justify-between px-6 ">
-        <h1 className="px-3 -pt-3 font-black text-2xl text-slate-500">Dashboard</h1>
-
-        <input
-          type="search"
-          placeholder="Search for transactions"
-          className="w-1/3 bg-slate-100 p-2 rounded-lg"
-        />
-        <div className="bg-slate-200 h-9 w-9 rounded-lg mr-4 font-black text-slate-600 flex justify-center items-center">
-            {/* <FaBeer /> */}
-            EA
-          </div>
+    <div className="flex">
+      <div className="w-1/4">
+        <CardBalance />
+        <AllTransactions />
+        <Transactions />
       </div>
-      <div className="flex">
-        <div className="w-1/4 h-screen">
-          {/* Card Details */}
-          <div className="bg-slate-700 rounded-lg h-52 text-white p-4 m-7 flex flex-col justify-between">
-            <div>
-              {" "}
-              <small>CURRENT BALANCE</small>
-              <h2 className="text-3xl font-black">GHC 45,505.00</h2>
-            </div>
-            <div>
-              {" "}
-              <small className="text-lg">**** **** **** 4593</small>
-            </div>
-            <div className="flex justify-between">
-              <div>
-                <small>CARD HOLDER</small>
-                <h2 className="text-md font-bold">PHILOMENA POTINGE</h2>
-              </div>
-              <div>
-                <small>EXP DATE</small>
-                <h2 className="text-md font-bold">09/25</h2>
-              </div>
-            </div>
+
+      <div className=" w-3/4">
+        <Expenses />
+        <Graph />
+      </div>
+      <button
+        onClick={toggleModal}
+        className="bg-slate-200 text-slate-700 absolute py-3 px-5 font-black bottom-0 right-0 m-9 rounded-md text-4xl"
+      >
+        +
+      </button>
+
+      {/* Modal */}
+      <div className="flex flex-col items-center justify-center min-h-screen w-auto">
+        <Modal isOpen={isModalOpen} onClose={toggleModal}>
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-black text-slate-600 mb-4">New Data</h1>
+            <p
+              onClick={onCloseModal}
+              className="font-black -mt-6 cursor-pointer bg-slate-100 rounded-full py-3 px-5"
+            >
+              X
+            </p>
           </div>
 
-          {/* Recent Transactions */}
-          <div className="p-8">
-            <div>
-              <h1 className="font-black text-slate-600">Recent Transactions</h1>
-              <Transactions />
-            </div>
+          {/* Body */}
+          <div className="flex flex-col">
+            <select
+              className="bg-slate-100 mt-5 py-3 px-4 rounded-md"
+              value={selectedValue}
+              onChange={handleChange}
+            >
+              <option value={"category"}>Category</option>
+              <option value={"expenses"}>Expense</option>
+              <option value={"income"}>Income</option>
+            </select>
+            {content}
           </div>
-        </div>
-
-        {/* Graphs section */}
-        <div className=" w-3/4">
-          <div>
-            <div className=" p-5 border-2 m-8 border-slate-100 rounded-xl">
-              <h1 className="font-black text-slate-600">Your Expenses</h1>
-              <div className="flex flex-start">
-                <div className="w-48 h-40 border-2 bg-slate-100 border-slate-100 rounded-xl mt-4 mr-12">
-                  <h1 className="font-medium p-4 text-slate-600">
-                    Food and Drink
-                  </h1>
-                </div>
-                <div className="w-48 h-40 border-2 bg-slate-100 border-slate-100 rounded-xl mt-4 mr-12">
-                  <h1 className="font-medium p-4 text-slate-600">
-                    Miscellanous
-                  </h1>
-                </div>
-                <div className="w-48 h-40 border-2 bg-slate-100 border-slate-100 rounded-xl mt-4">
-                  <h1 className="font-medium p-4 text-slate-600">Savings</h1>
-                </div>
-              </div>
-            </div>
-
-            {/* Graph */}
-            <div className=" p-5 border-2 m-8 border-slate-100 rounded-xl">
-              <h1 className="font-black text-slate-600">Graph</h1>
-              <div className="flex flex-start"></div>
-            </div>
-          </div>
-        </div>
+          <button
+            type="submit"
+            className="flex w-full justify-center mt-5 rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+          >
+            Save and Close
+          </button>
+        </Modal>
       </div>
     </div>
   );

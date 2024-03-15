@@ -4,9 +4,9 @@ import { transactions } from "../resources/data";
 
 const Transactions = () => {
   return (
-    <div>
+    <>
       {transactions.map((transaction) => (
-        <div className="bg-slate-50 p-4 my-4 rounded-xl flex jus">
+        <div className="bg-slate-50 p-4 my-4 rounded-xl flex mx-6">
           <div className="bg-slate-200 h-12 w-12 rounded-lg mr-4 font-black text-slate-600 flex justify-center items-center">
             {/* <FaBeer /> */}
             EA
@@ -23,7 +23,7 @@ const Transactions = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
