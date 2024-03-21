@@ -20,3 +20,9 @@ code {
 input{
   text-indent: 12px;
 }
+
+
+
+progress::-moz-progress-bar { background: #A2CAEF; }
+progress::-webkit-progress-value { background: #A2CAEF; }
+progress { color: rgb(233, 224, 224)EF; }

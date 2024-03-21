@@ -21,7 +21,7 @@ export const signUp = async (req: Request, res: Response) => {
     });
 
     if(existingUser){
-        return res.status(StatusCodes.BAD_REQUEST).json({message: `User with this credentials already exists`})
+        return res.status(StatusCodes.CONFLICT).json({message: `User with this credentials already exists`})
     }
     const newUser = await Users.create({
       ...req.body,
