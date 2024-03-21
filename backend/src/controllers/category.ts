@@ -39,7 +39,7 @@ export const createCategory = async (req: Request, res: Response) => {
         const existingCategory = await Category.findOne({name : req.body.name})
 
         if(existingCategory){
-            return res.status(StatusCodes.BAD_REQUEST).json({message: 'Category with this name already exists'})
+            return res.status(StatusCodes.CONFLICT).json({message: 'Category with this name already exists'})
         }
 
         res.status(StatusCodes.OK).json({message: 'Category added successfully.' , newCategory})

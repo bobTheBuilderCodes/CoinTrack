@@ -4,7 +4,7 @@ import DashboardNav from "../../components/DashboardNav"
 
 const RootLayout = () => {
   return (
-    <div>
+    <div className="">
        <DashboardNav />
         <Outlet />
     </div>

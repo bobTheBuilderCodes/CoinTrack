@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AllTransactions from "../../components/AllTransactions";
 import CardBalance from "../../components/CardBalance";
-import Expenses from "../../components/Expenses";
+import Expenses from "../../components/Categories";
 import Graph from "../../components/Graph";
 import Transactions from "../../components/Transaction";
 import Modal from "../../components/Modal";
@@ -43,16 +43,17 @@ const Dashboard = () => {
         <Transactions />
       </div>
 
-      <div className=" w-3/4">
+      <div className=" w-3/4 relative">
         <Expenses />
         <Graph />
-      </div>
-      <button
+        <button
         onClick={toggleModal}
-        className="bg-slate-200 text-slate-700 absolute py-3 px-5 font-black bottom-0 right-0 m-9 rounded-md text-4xl"
+        className="bg-slate-200 text-slate-700 fixed py-3 px-5 font-black bottom-0 right-0 m-9 rounded-md text-4xl"
       >
         +
       </button>
+      </div>
+      
 
       {/* Modal */}
       <div className="flex flex-col items-center justify-center min-h-screen w-auto">
