@@ -8,10 +8,16 @@ import Modal from "../../components/Modal";
 import CategoryForm from "../../components/CategoryForm";
 import ExpensesForm from "../../components/ExpensesForm";
 import IncomeForm from "../../components/IncomeForm";
+import { useGetAllCategoriesQuery } from "../../services/categories";
+;
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("category");
+
+  const {data} = useGetAllCategoriesQuery('')
+
+  console.log("Data", data?.categories)
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -36,15 +42,17 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex">
-      <div className="w-1/4">
+    <div className="flex h-full">
+      <div className="w-1/4 h-full">
         <CardBalance />
         <AllTransactions />
+       
         <Transactions />
       </div>
 
-      <div className=" w-3/4 relative">
+      <div className=" w-3/4 relative h-full overflow-scroll">
         <Expenses />
+        
         <Graph />
         <button
         onClick={toggleModal}
